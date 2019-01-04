@@ -1,2 +1,2 @@
-# fabric-examples
+# study-for-fabric
 some examples
