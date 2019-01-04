@@ -1,2 +1,2 @@
-# go-fabric-chaincode
+# fabric-examples
 some examples
