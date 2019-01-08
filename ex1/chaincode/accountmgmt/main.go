@@ -56,7 +56,7 @@ func (am *AccountMgmt) queryIDByIDOrName(stub shim.ChaincodeStubInterface, args 
 }
 
 func (am *AccountMgmt) createAccount(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	if args
+	return shim.Success(nil)
 }
 
 func (am *AccountMgmt) Init(stub shim.ChaincodeStubInterface) pb.Response {
