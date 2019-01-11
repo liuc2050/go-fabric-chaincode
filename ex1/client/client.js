@@ -8,21 +8,22 @@ Client.addConfigFile(path.join(__dirname, './config.json'));
 var NETWORK = Client.getConfigSetting('network');
 var client = new Client();
 var channel = client.newChannel(NETWORK['channel-name']);
-channel.addOrderer(
-    client.newOrderer(NETWORK.orderer.url),
+
+channel.addOrderer(client.newOrderer(
+    NETWORK.orderer.url,
     {
-        'pem': Buffer.from(fs.readFileSync(path.join(__dirname, NETWORK.orderder.tls_cacerts))).toString(),
-        'ssl-target-name-override': NETWORK.orderder.server-hostname
+        'pem': Buffer.from(fs.readFileSync(path.join(__dirname, NETWORK.orderer.tls_cacerts))).toString(),
+        'ssl-target-name-override': NETWORK.orderer['server-hostname']
     }
-);
+));
 
 for (let peer in NETWORK) {
-    if (NETWORK.hasOwnProperty(peer) && typeof NETWORK.peer.peer1 !== 'undefined') {
+    if (NETWORK.hasOwnProperty(peer) && typeof NETWORK[peer].peer1 !== 'undefined') {
         channel.addPeer(client.newPeer(
-            NETWORK.peer.peer1.requests,
+            NETWORK[peer].peer1.requests,
             {
-                'pem': Buffer.from(fs.readFileSync(path.join(__dirname, peer.peer1.tls_cacerts))).toString(),
-                'ssl-target-name-override': peer.peer1.server-hostname
+                'pem': Buffer.from(fs.readFileSync(path.join(__dirname, NETWORK[peer].peer1.tls_cacerts))).toString(),
+                'ssl-target-name-override': NETWORK[peer].peer1['server-hostname']
             }
         ));
     }
